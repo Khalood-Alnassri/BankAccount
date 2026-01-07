@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            //system storage
             string storedAccountNumber = "Saving 12053446";
             int storedBalance = 5000;
             string storedAccountNumber2 = "Saving 43368923";
