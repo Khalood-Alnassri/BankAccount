@@ -8,7 +8,11 @@
             int storedBalance = 5000;
             string storedAccountNumber2 = "Saving 43368923";
             int storedBalance2 = 8000;
-            
+
+            Console.WriteLine("Welcome to Bank system.");
+            Console.WriteLine("Select the process you need: ");
+            Console.WriteLine(" 1.Withdraw money from ATM machine.");
+            Console.WriteLine(" 2.Send money to other account.");
             int option = int.Parse(Console.ReadLine());
             switch (option)
             { 
