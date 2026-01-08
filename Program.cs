@@ -9,7 +9,18 @@
             string[] accounts = new string[100]; // 100 accounts
             double[] balance = new double[100]; //account balance
             int LastAccountIndex = -1;
+             //seed data
+            owners[0] = "Sami";
+            accounts[0] = "ACC0";
+            balance[0] = 5000;
+            LastAccountIndex++;
 
+            owners[1] = "Sara";
+            accounts[1] = "ACC1";
+            balance[1] = 6000;
+            LastAccountIndex++;
+
+            bool exit = false;  
             while (true)
             {
                 Console.WriteLine("Welcome to Bank system.");
@@ -39,33 +50,46 @@
 
                         LastAccountIndex++;
 
-                    break;
+                        break;
 
                     case 2:
                         //Deposit Money to account
+
+                        //input
                         Console.WriteLine("Enter account number: ");
                         string accountNumber = Console.ReadLine();
+                        Console.WriteLine("Enter money amount: ");
+                        double amount_deposit = double.Parse(Console.ReadLine());
 
-                        if (accountNumber == accounts)
+                        //process
+                        bool accountFound = false;
+                        for (int i = 0; i < 100; i++)
                         {
-                            Console.WriteLine("Enter money amount: ");
-                            double amount_deposit = double.Parse(Console.ReadLine());
+                            if (accountNumber == accounts[i])
+                            { 
 
-                            balance += amount_deposit;
+                                balance[i] += amount_deposit;
+                                accountFound = true;
+                                break;
 
-                            Console.WriteLine("your balance is =" + balance);
-                            Console.WriteLine("reciept balance in your account.");
-                          
+                            }
                         }
-                        else
+
+                        if (accountFound == false) 
                         {
 
                             Console.WriteLine("Account number not found.");
 
                         }
+                        else
+                        {
+                            Console.WriteLine("Deposit money sussfully");
+                           //send sms  
+
+                        }
 
                         break;
-                      
+
 
                     case 3:
 
@@ -74,50 +98,86 @@
                         Console.WriteLine("Enter account number :");
                         string accountNumber1 = Console.ReadLine();
 
-                        Console.WriteLine("Enter the amount to withdraw :");
-                        double amount = double.Parse(Console.ReadLine());
 
-                        if (accountNumber1 == accounts)
+
+                        bool AccountFound = false;
+                        for (int i = 0; i < 100; i++)
                         {
-                            if (amount <= balance)
+                            if (accountNumber1 == accounts[i])
                             {
-                                balance -= amount;
-                                Console.WriteLine("The remaining balance =" + balance);
-                                Console.WriteLine("Please collect your cash");
+                                AccountFound = true;
+
+                                Console.WriteLine("Enter the amount to withdraw :");
+                                double amount = double.Parse(Console.ReadLine());
+
+
+                                if (amount <= balance[i])
+                                {
+                                    balance[i] -= amount;
+                                    Console.WriteLine("The remaining balance =" + balance[i]);
+
+                                 
+                                }
+
+                                else 
+                                {
+                                    Console.WriteLine("amount insuffient");
+                                }
+
+                                break;
                             }
-                            else
-                            {
-                                Console.WriteLine("Insufficient balance.");
-                            }
+
                         }
+
+                        if (AccountFound == false)
+                        {
+                            Console.WriteLine("Sorry account number not found.");
+                        }
+
 
                         else
                         {
-                            Console.WriteLine("Invalid account number.");
+                            Console.WriteLine("Please collect your cash");
+
                         }
 
-                    break;
+
+
+                        break;
 
                     case 4:
                         //Check Balance of account
                         Console.WriteLine("Enter account number: ");
                         string account_number = Console.ReadLine();
 
-                        if (account_number == accounts)
+                        bool IsAccountFound = false;
+                        double AccBalance = 0;
+                        for (int i = 0; i < 100; i++)
                         {
-                            Console.WriteLine("your balance is = " + balance);
+                            if (account_number == accounts[i])
+                            {
+                                IsAccountFound = true;
+                                AccBalance = balance[i];
+                                break;
+                            }
+
                         }
 
-                        else
+                        if (IsAccountFound == false)
                         {
+
                             Console.WriteLine("Invalid account number");
 
                         }
 
-                    break;
+                        else
+                        {
+                            Console.WriteLine("Account balance" + AccBalance);
+                        }
+
+                        break;
 
                     case 5:
-
 
                         // send money to other account
                         Console.WriteLine("Enter sender account number: ");
@@ -126,45 +186,41 @@
                         string RecieveraccountNumber = Console.ReadLine();
 
 
-                        if (SenderaccountNumber == accounts && RecieveraccountNumber == accounts)
-                        {
-                            Console.WriteLine("Enter the amount to withdraw :");
-                            double amount_send = double.Parse(Console.ReadLine());
+                  
 
-                            if (amount_send <= balance)
-                            {
-                                balance -= amount_send;
-                                balance += amount_send;
-                                Console.WriteLine("The remaining balance =" + balance);
-                                Console.WriteLine("The balance =" + balance);
-                                Console.WriteLine("The amount has been transferred");
 
-                            }
 
-                            else
-                            {
-                                Console.WriteLine("Sorry refused");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Account number not found.");
-                        }
-                        break;
+
+
+
+                     break;
 
 
                     case 6:
 
+                        exit = true;
 
-                    break;
-                        
+                        break;
 
 
                     default:
 
-                    break;
+                        Console.WriteLine("Invalid option.");
+
+                        break;
 
                 }
+
+
+                if (exit == true)
+                {
+                    break;
+                }
+
+
+                Console.WriteLine("Press any key to continue....");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
     }
