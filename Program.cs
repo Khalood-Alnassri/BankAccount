@@ -181,19 +181,72 @@
 
                         // send money to other account
                         Console.WriteLine("Enter sender account number: ");
-                        string SenderaccountNumber = Console.ReadLine();
+                        string SenderAccountNumber = Console.ReadLine();
                         Console.WriteLine("Enter reciever account number: ");
-                        string RecieveraccountNumber = Console.ReadLine();
+                        string RecieverAccountNumber = Console.ReadLine();
+                        Console.Write("Enter transfer amount: ");
+                        double transferAmount = double.Parse(Console.ReadLine());
+
+                        //processing
+                        bool senderFound = false;
+                        int senderBalance = 0;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            if (SenderAccountNumber == accounts[i])
+                            {
+                                senderBalance = i;
+                                senderFound = true;
+                                break;
+                            }
+                        }
+
+                        if (senderFound == false)
+                        {
+                            Console.WriteLine("sender account not found");
+
+                        }
+                        else // source found and proceed to find destination account
+                        {
+
+                            bool recieverFound = false;
+                            int recieverBalance = 0;
+                            for (int i = 0; i < 100; i++)
+                            {
+                                if (RecieverAccountNumber == accounts[i])
+                                {
+                                    recieverBalance = i;
+                                    recieverFound = true;
+                                    break;
+                                }
+                            }
+
+                            if (recieverFound == false)
+                            {
+                                Console.WriteLine("reciever account not found");
+
+                            }
+
+                            else // destination found and proceed to transfer money
+                            {
+
+                                if (balance[senderBalance] <= transferAmount)
+                                {
+                                    balance[senderBalance] -= transferAmount;
+                                    balance[recieverBalance] += transferAmount;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Insufficient balance in source account");
+                                }
+
+                            }
 
 
-                  
+                        }
 
 
-
-
-
-
-                     break;
+                        break;
 
 
                     case 6:
